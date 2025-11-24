@@ -208,7 +208,7 @@ window.actBattle = function(sk) {
             const d = calcDmg(sk, s, g.enemy, g.currentJob);
             let dmg = Math.floor(d.min + Math.random()*(d.max-d.min));
             let cr=0.05; 
-            if(sk.id==='snipe' || g.isFocused) cr=1.0; 
+            if(sk.id==='snipe' || sk.id==='Headshot' || g.isFocused) cr=1.0; 
             else if(g.currentJob.bonus.crit) cr+=g.currentJob.bonus.crit;
             
             // DEX Crit Scaling
@@ -234,19 +234,24 @@ function enemyTurn() {
     if(g.gameOver || !g.enemy || g.enemy.hp<=0) return;
     
     if(g.enemy.isStunned) {
-        log("敵は動けない...","l-grn"); g.enemy.isStunned = false; g.guardStance = 0;
-        tickBattleTurns(); return;
+        log("敵は動けない...","l-grn");
+        g.enemy.isStunned = false;
+        g.guardStance = 0;
+        tickBattleTurns();
+        return;
     }
     
     const s = getStats(g.lv, g.awakening, g.axis);
     const agiDiff = Math.max(0, s.AGI - (g.enemy.lv*4));
     if(Math.random() < agiDiff*0.025) { 
-        log("敵を置き去りにした！","l-spd"); g.guardStance = 0; return; 
+        log("敵を置き去りにした！","l-spd"); 
+        g.guardStance = 0;
+        return; 
     }
 
     if(g.isCharging) {
         g.isCharging = false;
-        let dmg = Math.floor(g.enemy.atk * 2.5);
+        let dmg = Math.floor(g.enemy.atk * 3);
         if(g.currentJob.bonus.def) dmg = Math.floor(dmg * g.currentJob.bonus.def);
         
         if(g.guardStance === 2) { dmg = 0; log("完全防御！(0dmg)", "l-grn"); }
@@ -264,7 +269,9 @@ function enemyTurn() {
             }
         }
         applyDamage(dmg, true);
-        g.guardStance = 0; tickBattleTurns(); return;
+        g.guardStance = 0;
+        tickBattleTurns();
+        return;
     }
 
     const acts = g.enemy.act || ['atk'];
@@ -341,11 +348,15 @@ function applyDamage(dmg, isBig=false) {
     }
 }
 
+// ... WinBattle以降は変更なし
 function winBattle() {
     const gain = 15 + g.enemy.lv*5; g.exp+=gain;
     if(g.currentJob.bonus.time) { g.turns = Math.min(g.maxTurns, g.turns+1); log(`勝利(+Exp${gain},寿命+1)`, "l-grn"); }
     else { log(`勝利(+Exp${gain},寿命-2)`, "l-grn"); consumeTime(2); }
-    
+
+    // Reset states
+    g.awakening = false; g.isFocused = false; g.immortalTurns = 0; g.guardStance = 0;
+
     if(g.enemy.isBoss && g.floor===5) {
         g.state='EXPLORE'; g.enemy=null; log("中ボス撃破！6階へ","l-boss");
         g.floor++; g.stairsFound=false; g.searchCount=0;
