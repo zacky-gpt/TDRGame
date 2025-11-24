@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TDR: Soul Visualizer</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* タイトル画面専用のスタイル上書き */
+        body { justify-content: center; align-items: center; text-align: center; }
+        h1 { font-size: 3em; color: #ffeb3b; text-shadow: 0 0 20px rgba(255, 235, 59, 0.5); margin-bottom: 10px; }
+        p { color: #aaa; margin-bottom: 40px; font-size: 1.2em; }
+        .start-btn {
+            display: inline-block;
+            padding: 20px 60px;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #fff;
+            background: linear-gradient(45deg, #304ffe, #d50000);
+            border: 2px solid #fff;
+            border-radius: 50px;
+            text-decoration: none; /* リンクの下線を消す */
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .start-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(255, 255, 255, 0.4);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <h1>TDR<br>Soul Visualizer</h1>
+        <p>魂の "熱" "深さ" "硬さ" を計測する<br>循環型ダンジョン探索RPG</p>
+        
+        <a href="game.html" class="start-btn">START DIVE</a>
+    </div>
+
+</body>
+</html>

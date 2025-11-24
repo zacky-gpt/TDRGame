@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRD-SoulVisualizer</title>
+    <link rel="stylesheet" href="style.css">
+<script src="script.js"></script>
+
+<link rel="stylesheet" href="css/style.css">
+<script src="js/script.js"></script>
+</head>
+<body>
+
+<div id="error-trap"></div>
+
+<div id="game-root">
+    <div id="header-panel">
+        <div id="job-banner">
+            <div><span style="font-size:0.8em; color:#aaa;">CLASS:</span> <span id="job-name" onclick="showJobGuide()">Novice</span></div>
+            <span id="job-bonus">Bonus: None</span>
+        </div>
+        <div class="life-row"><span>LIFE LIMIT</span> <span id="disp-turn">150</span></div>
+        <div class="life-bg"><div class="life-fill" id="bar-turn"></div></div>
+    </div>
+
+    <div id="main-view">
+        <div id="axis-panel">
+            <div class="axis-group">
+                <div class="axis-labels">
+                    <span style="color:#88f">Cool(INT)</span>
+                    <span id="val-t" class="axis-val">50</span>
+                    <span style="color:#f88">Hot(STR)</span>
+                </div>
+                <div class="axis-track th-t"><div class="axis-thumb" id="th-t" style="left:50%"></div></div>
+            </div>
+            <div class="axis-group">
+                <div class="axis-labels">
+                    <span style="color:#bfb">Shallow(AGI)</span>
+                    <span id="val-d" class="axis-val">50</span>
+                    <span style="color:#a85">Deep(VIT)</span>
+                </div>
+                <div class="axis-track th-d"><div class="axis-thumb" id="th-d" style="left:50%"></div></div>
+            </div>
+            <div class="axis-group">
+                <div class="axis-labels">
+                    <span style="color:#8af">Flex(MND)</span>
+                    <span id="val-r" class="axis-val">50</span>
+                    <span style="color:#ff3">Rigid(DEX)</span>
+                </div>
+                <div class="axis-track th-r"><div class="axis-thumb" id="th-r" style="left:50%"></div></div>
+            </div>
+        </div>
+        
+        <div id="encounter-box"><div id="enc-content"></div></div>
+        <div id="log-list"><div class="l-yel">System: TDRGameリポジトリへ移行完了。</div></div>
+        
+        <div id="status-panel">
+            <div class="st-row"><span>Lv <span id="pl-lv" style="color:#fff">1</span></span> <span>B<span id="pl-fl">1</span></span></div>
+            <div class="st-row"><span style="color:#fa0">HP <span id="pl-hp">20</span>/<span id="pl-mhp">20</span></span> <span style="color:#8cf">MP <span id="pl-mp">10</span>/<span id="pl-mmp">10</span></span></div>
+            <div class="st-row" style="justify-content: center; color:#aaa; font-size:0.9em;"><span>Exp: <span id="pl-exp">0</span> / <span id="pl-next">30</span></span></div>
+        </div>
+
+        <div id="item-belt"></div>
+        <div id="cmd-grid"><button class="cmd-btn" disabled>Loading...</button></div>
+        
+        <div id="system-footer">
+            <button class="sys-btn" onclick="saveGame()">Save</button>
+            <button class="sys-btn" onclick="loadGame()">Load</button>
+            <button class="sys-btn" onclick="resetGame()">Reset</button>
+        </div>
+    </div>
+</div>
+
+<div id="modal-lv" class="modal-overlay"><div class="modal-win"><h3 style="color:#ff0;">LEVEL UP</h3><div id="lv-opts"></div></div></div>
+<div id="modal-job" class="modal-overlay" onclick="closeJobGuide(event)"><div class="modal-win"><h3 style="color:#ff0;">Class Guide</h3><div id="job-list"></div><button onclick="document.getElementById('modal-job').style.display='none'" style="margin-top:10px; width:100%; padding:10px;">Close</button></div></div>
+
+<script src="script.js"></script>
+</body>
+</html>

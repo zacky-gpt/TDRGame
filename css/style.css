@@ -1,0 +1,69 @@
+body { background-color: #000; color: #ccc; font-family: 'Courier New', monospace; margin: 0; padding: 5px; min-height: 100vh; display: flex; flex-direction: column; touch-action: manipulation; font-size: 15px; line-height: 1.3; }
+button { cursor: pointer; user-select: none; touch-action: manipulation; font-family: inherit; font-size: 0.95rem; }
+#error-trap { display: none; background: #500; color: #fff; padding: 10px; border: 2px solid #f00; font-weight: bold; white-space: pre-wrap; margin-bottom: 10px; }
+#game-root { flex-grow: 1; display: flex; flex-direction: column; max-width: 600px; margin: 0 auto; border: 1px solid #444; background: #111; padding-bottom: 8px; }
+
+#header-panel { background: #222; border-bottom: 1px solid #444; padding: 10px 15px; }
+#job-banner { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+#job-name { font-size: 1.2em; font-weight: bold; color: #ff0; text-decoration: underline; cursor: pointer; }
+#job-bonus { font-size: 0.85em; color: #8f8; }
+.life-row { display: flex; justify-content: space-between; font-size: 0.85em; color: #f88; margin-bottom: 3px; font-weight: bold; }
+.life-bg { width: 100%; height: 8px; background: #333; border: 1px solid #555; border-radius: 2px; }
+.life-fill { height: 100%; background: #f33; width: 100%; transition: width 0.3s; }
+
+#main-view { padding: 10px 15px; }
+
+#axis-panel { margin-bottom: 12px; background: #050505; padding: 8px; border: 1px solid #333; }
+.axis-group { margin-bottom: 8px; }
+.axis-labels { display: flex; justify-content: space-between; align-items: center; font-size: 0.75em; color: #aaa; margin-bottom: 3px; }
+.axis-val { font-weight: bold; color: #fff; background: #333; padding: 1px 6px; border-radius: 3px; min-width: 24px; text-align: center; }
+.axis-track { width: 100%; height: 8px; background: #222; position: relative; overflow: hidden; border-radius: 4px; border: 1px solid #444; }
+.axis-thumb { width: 12px; height: 100%; background: #fff; position: absolute; transform: translateX(-50%); top: 0; }
+.th-t { background: linear-gradient(90deg, #44f, #f44); } 
+.th-d { background: linear-gradient(90deg, #4f4, #a84); } 
+.th-r { background: linear-gradient(90deg, #4af, #ff4); } 
+
+#encounter-box { min-height: 70px; margin-bottom: 12px; padding: 8px; border: 1px solid #555; text-align: center; background: #000; display: none; border-radius: 4px; }
+.en-name { font-size: 1.15em; font-weight: bold; display: block; margin-bottom: 3px; }
+.en-desc { font-size: 0.8em; color: #aaa; }
+
+#log-list { height: 140px; overflow-y: auto; background: #050505; border: 1px solid #444; padding: 8px; font-size: 0.85em; display: flex; flex-direction: column-reverse; margin-bottom: 12px; line-height: 1.3; }
+.l-gry { color: #888; } .l-red { color: #f66; } .l-grn { color: #6f6; }
+.l-blu { color: #6cf; } .l-yel { color: #ff6; } 
+.l-dmg { color: #f44; font-weight: bold; background: #211; padding: 0 3px; }
+.l-boss { color: #f80; font-weight: bold; border: 1px solid #f80; background: #310; padding: 3px; display:block; text-align:center;}
+.l-kill { color: #f0f; font-weight: bold; }
+.l-sys { color: #fff; background: #333; border-left: 3px solid #888; padding-left: 5px; }
+.l-spd { color: #0ff; font-weight: bold; font-style: italic; }
+
+#status-panel { background: #222; padding: 8px; border-radius: 4px; margin-bottom: 10px; font-weight: bold; font-size: 0.9em; color: #eee; border: 1px solid #444; }
+.st-row { display: flex; justify-content: space-between; margin-bottom: 4px; }
+
+#item-belt { display: flex; gap: 6px; margin-bottom: 12px; overflow-x: auto; padding-bottom: 4px; }
+.item-chip { border: 1px solid #666; background: #333; color: #eee; padding: 5px 10px; font-size: 0.8em; cursor: pointer; white-space: nowrap; border-radius: 3px; }
+.item-chip:hover { border-color: #fff; background: #444; }
+
+#cmd-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; margin-bottom: 12px; }
+.cmd-btn { background: #222; color: #eee; border: 1px solid #555; padding: 5px; cursor: pointer; text-align: center; min-height: 55px; display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 4px; }
+.cmd-btn:active { background: #444; }
+.cmd-btn:disabled { opacity: 0.3; filter: grayscale(100%); }
+.b-name { font-weight: bold; font-size: 0.85em; display: block; margin-bottom: 2px; }
+.b-meta { font-size: 0.7em; color: #aaa; display: flex; flex-direction: column; line-height: 1.1; }
+.b-pred { color: #fa0; font-weight: bold; margin-top: 1px; font-size: 0.8em; }
+.b-cd { color: #f44; font-weight: bold; font-size: 0.8em; margin-top:1px; } /* クールタイム表示 */
+.b-unique { border: 1px solid #d4d; background: #202; }
+
+#system-footer { border-top: 1px solid #333; padding-top: 10px; display: flex; justify-content: center; gap: 15px; }
+.sys-btn { background: #111; color: #888; border: 1px solid #444; padding: 6px 15px; font-size: 0.8em; border-radius: 3px; }
+.sys-btn:hover { background: #333; color: #fff; border-color: #fff; }
+
+.modal-overlay { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(0,0,0,0.9); z-index: 99; }
+.modal-win { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #111; border: 2px solid #ff0; padding: 15px; width: 90%; max-width: 450px; max-height: 90vh; overflow-y: auto; text-align: center; }
+.m-btn { width: 100%; padding: 15px; margin: 6px 0; background: linear-gradient(90deg, #222, #151515); color: #fff; border: 1px solid #555; border-left: 5px solid #ff0; text-align: left; font-size: 1.0em; font-weight: bold; border-radius: 4px; }
+.m-btn:hover { background: #333; border-color: #fff; }
+.m-btn span { float: right; color: #f66; font-weight: normal; font-size: 0.85em; background: rgba(0,0,0,0.5); padding: 2px 4px; border-radius: 2px; }
+
+.job-row { text-align: left; border: 1px solid #444; padding: 8px; margin-bottom: 4px; background: #1a1a1a; font-size: 0.85em; }
+.job-row.active { border-color: #ffeb3b; background: rgba(255, 235, 59, 0.1); }
+.job-req { font-size: 0.8em; color: #fa0; display: block; margin-top:2px; }
+.job-eff { font-size: 0.85em; color: #8f8; display: block; }
